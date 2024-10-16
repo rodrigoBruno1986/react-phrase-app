@@ -11,6 +11,7 @@ interface PhraseContextType {
   addPhrase: (phrase: string) => void;
   deletePhrase: (index: number) => void;
   filterPhrases: (query: string) => string[];
+  editPhrase: (index: number, newPhrase: string) => void;
 }
 
 const PhraseContext = createContext<PhraseContextType | undefined>(undefined);
@@ -52,9 +53,16 @@ export const PhraseProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
+  const editPhrase = (index: number, newPhrase: string) => {
+    const updatedPhrases = phrases.map((phrase, i) =>
+      i === index ? newPhrase : phrase
+    );
+    setPhrases(updatedPhrases);
+  };
+
   return (
     <PhraseContext.Provider
-      value={{ phrases, addPhrase, deletePhrase, filterPhrases }}
+      value={{ phrases, addPhrase, deletePhrase, filterPhrases, editPhrase }}
     >
       {children}
     </PhraseContext.Provider>

@@ -7,7 +7,7 @@ import SearchBar from './components/SearchBar';
 import Card from './components/Card/Card';
 
 const App = () => {
-  const { phrases, deletePhrase, filterPhrases } = usePhrases();
+  const { phrases, deletePhrase, filterPhrases, editPhrase } = usePhrases();
   const [filteredPhrases, setFilteredPhrases] = useState<string[]>(phrases);
 
   const handleSearch = (query: string) => {
@@ -43,7 +43,8 @@ const App = () => {
             <Card
               key={index}
               phrase={phrase}
-              onDelete={() => deletePhrase(index)}
+              onDelete={() => deletePhrase(index)} // Mantén la funcionalidad de eliminar
+              onEdit={(newPhrase) => editPhrase(index, newPhrase)} // Añade la funcionalidad de editar
             />
           ))}
         </SimpleGrid>

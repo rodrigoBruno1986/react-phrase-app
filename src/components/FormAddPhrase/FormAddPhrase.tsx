@@ -1,6 +1,5 @@
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
 import { FormErrorMessage, FormControl } from '@chakra-ui/react';
 import { usePhrases } from '../../context/PhraseContext';
 import {
@@ -8,17 +7,11 @@ import {
   StyledInput,
   StyledButton,
 } from './FormAddPhrase.styles';
+import { phraseValidationSchema } from '../../utils/validation';
 
 interface FormValues {
   phrase: string;
 }
-
-const validationSchema = Yup.object({
-  phrase: Yup.string()
-    .min(5, 'La frase debe tener al menos 5 caracteres')
-    .max(150, 'La frase no puede superar los 150 caracteres')
-    .required('Campo obligatorio'),
-});
 
 const FormAddPhrase = () => {
   const { addPhrase } = usePhrases();
@@ -28,7 +21,7 @@ const FormAddPhrase = () => {
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={validationSchema}
+      validationSchema={phraseValidationSchema}
       validateOnBlur={false}
       validateOnChange={false}
       onSubmit={(values, actions) => {
