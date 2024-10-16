@@ -37,7 +37,8 @@ const App = () => {
         alignItems='center'
         flexDirection='column'
       >
-        <SearchBar onSearch={handleSearch} />
+        <SearchBar onSearch={handleSearch}></SearchBar>
+
         <SimpleGrid columns={[1, 1, 1]} spacing={5} mt={5} width='100%'>
           {filteredPhrases.map((phrase, index) => (
             <Card
