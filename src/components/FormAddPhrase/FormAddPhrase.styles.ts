@@ -21,8 +21,8 @@ export const StyledTextArea = styled(ChakraTextarea)`
   &:focus {
     border-color: ${colors.primary[500]};
   }
-  resize: vertical; /* Permite que el usuario ajuste la altura */
-  min-height: 100px; /* Altura inicial moderada */
+  resize: vertical;
+  min-height: 100px;
 `;
 
 export const StyledButton = styled(ChakraButton)`

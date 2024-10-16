@@ -20,7 +20,7 @@ const App = () => {
 
   return (
     <Container>
-      <StyledHeading as='h1' mb={61}>
+      <StyledHeading as='h1' mb={6}>
         App de Gestión de Frases
       </StyledHeading>
       <ContentFormAddPhrase>
@@ -28,7 +28,7 @@ const App = () => {
       </ContentFormAddPhrase>
 
       <Box
-        mt={10}
+        mt={20}
         maxW='700px'
         mx='auto'
         display='flex'

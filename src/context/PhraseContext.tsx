@@ -42,7 +42,7 @@ export const PhraseProvider = ({ children }: { children: ReactNode }) => {
   }, [phrases]);
 
   const addPhrase = (phrase: string) => {
-    setPhrases([...phrases, phrase]);
+    setPhrases([phrase, ...phrases]);
     showSuccessToast('Frase agregada exitosamente');
   };
 
