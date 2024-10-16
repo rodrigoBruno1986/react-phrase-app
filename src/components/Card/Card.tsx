@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { Text, IconButton, Flex } from '@chakra-ui/react';
 import { FaTrash, FaEdit } from 'react-icons/fa';
-import { StyledCard, StyledCardHeader } from './Card.styles';
+import {
+  StyledCard,
+  StyledCardHeader,
+  StyledIconButtonContainer,
+} from './Card.styles';
 import EditPhraseModal from '../Modals/EditPhraseModal';
 import DeleteConfirmationModal from '../Modals/DeleteConfirmationModal';
+import colors from '../../theme/colors';
 
 interface CardProps {
   phrase: string;
@@ -17,28 +22,37 @@ const PhraseCard: React.FC<CardProps> = ({ phrase, onDelete, onEdit }) => {
 
   return (
     <>
-      <StyledCard>
-        <StyledCardHeader>
-          <Text size='md'>{phrase}</Text>
-        </StyledCardHeader>
-      </StyledCard>
-      <Flex justifyContent='flex-end'>
-        <IconButton
-          aria-label='Editar frase'
-          icon={<FaEdit />}
-          colorScheme='blue'
-          onClick={() => setEditModalOpen(true)}
-          size='sm'
-          mr={2}
-        />
-        <IconButton
-          aria-label='Eliminar frase'
-          icon={<FaTrash />}
-          colorScheme='red'
-          onClick={() => setDeleteModalOpen(true)}
-          size='sm'
-        />
+      <Flex alignItems='center'>
+        <StyledCard>
+          <StyledCardHeader>
+            <Text size='md'>{phrase}</Text>
+          </StyledCardHeader>
+        </StyledCard>
+
+        <StyledIconButtonContainer>
+          <IconButton
+            aria-label='Editar frase'
+            icon={<FaEdit />}
+            onClick={() => setEditModalOpen(true)}
+            size='sm'
+            fontSize='14px'
+            background='trasparent'
+            color={colors.primary[500]}
+            _hover={{ color: colors.primary[700] }}
+          />
+          <IconButton
+            aria-label='Eliminar frase'
+            icon={<FaTrash />}
+            onClick={() => setDeleteModalOpen(true)}
+            size='sm'
+            fontSize='14px'
+            background='trasparent'
+            color={colors.secondary[500]}
+            _hover={{ color: colors.secondary[700] }}
+          />
+        </StyledIconButtonContainer>
       </Flex>
+
       <EditPhraseModal
         isOpen={isEditModalOpen}
         onClose={() => setEditModalOpen(false)}

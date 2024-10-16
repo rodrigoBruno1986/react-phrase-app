@@ -4,6 +4,7 @@ import {
   CardHeader as ChakraCardHeader,
   CardBody as ChakraCardBody,
   Button,
+  Flex,
 } from '@chakra-ui/react';
 import colors from '../../theme/colors';
 
@@ -13,9 +14,6 @@ export const StyledCard = styled(ChakraCard)`
   transition: transform 0.2s;
   min-width: 150px;
   width: 100%;
-  &:hover {
-    transform: translateY(-5px);
-  }
 `;
 
 export const StyledCardHeader = styled(ChakraCardHeader)`
@@ -38,4 +36,9 @@ export const DeleteButton = styled(Button)`
   &:hover {
     background-color: ${colors.secondary[600]};
   }
+`;
+
+export const StyledIconButtonContainer = styled(Flex)`
+  display: flex;
+  flex-direction: column;
 `;

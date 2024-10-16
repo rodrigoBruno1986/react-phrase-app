@@ -38,13 +38,13 @@ const App = () => {
         flexDirection='column'
       >
         <SearchBar onSearch={handleSearch} />
-        <SimpleGrid columns={[1, 1, 1]} spacing={5} mt={10} width='100%'>
+        <SimpleGrid columns={[1, 1, 1]} spacing={5} mt={5} width='100%'>
           {filteredPhrases.map((phrase, index) => (
             <Card
               key={index}
               phrase={phrase}
-              onDelete={() => deletePhrase(index)} // Mantén la funcionalidad de eliminar
-              onEdit={(newPhrase) => editPhrase(index, newPhrase)} // Añade la funcionalidad de editar
+              onDelete={() => deletePhrase(index)}
+              onEdit={(newPhrase) => editPhrase(index, newPhrase)}
             />
           ))}
         </SimpleGrid>

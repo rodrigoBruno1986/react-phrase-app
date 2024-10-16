@@ -52,7 +52,6 @@ const EditPhraseModal: React.FC<EditPhraseModalProps> = ({
             placeholder='Editar frase...'
           />
           {error && <Text color='red.500'>{error}</Text>}{' '}
-          {/* Mostramos el error */}
         </ModalBody>
 
         <ModalFooter>
