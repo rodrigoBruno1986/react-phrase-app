@@ -30,7 +30,7 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
         <ModalBody>Estas seguro de eliminar la frase?</ModalBody>
 
         <ModalFooter>
-          <Button variant='ghost' mr={3} onClick={onClose}>
+          <Button mr={3} onClick={onClose}>
             Cancelar
           </Button>
           <Button colorScheme='red' onClick={onDelete}>

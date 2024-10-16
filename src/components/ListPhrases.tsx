@@ -18,13 +18,13 @@ const ListPhrases: React.FC<ListPhrasesProps> = ({
   return (
     <SimpleGrid columns={[1, 1, 1]} spacing={5} mt={5} width='100%'>
       {phrases.length === 0 && query === '' && (
-        <Text mt={5} color='gray.500'>
+        <Text mt={9} color='gray.500' justifyContent='center' display='flex'>
           No hay frases disponibles. ¡Agrega una nueva frase!
         </Text>
       )}
 
       {phrases.length === 0 && query !== '' && (
-        <Text mt={5} color='gray.500'>
+        <Text mt={9} color='gray.500' justifyContent='center' display='flex'>
           No se encontraron resultados para "{query}".
         </Text>
       )}

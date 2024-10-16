@@ -38,7 +38,7 @@ const PhraseCard: React.FC<CardProps> = ({ phrase, onDelete, onEdit }) => {
             fontSize='14px'
             justifyContent='flex-end'
             background='trasparent'
-            color={colors.primary[500]}
+            color='grey'
             _hover={{ color: colors.primary[700] }}
             _active={{ background: 'none', boxShadow: 'none' }}
           />
@@ -50,7 +50,7 @@ const PhraseCard: React.FC<CardProps> = ({ phrase, onDelete, onEdit }) => {
             justifyContent='flex-end'
             fontSize='14px'
             background='trasparent'
-            color={colors.secondary[500]}
+            color='grey'
             _hover={{ color: colors.secondary[700] }}
             _active={{ background: 'none', boxShadow: 'none' }}
           />

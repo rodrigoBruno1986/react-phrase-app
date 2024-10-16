@@ -4,7 +4,7 @@ import { FormErrorMessage, FormControl } from '@chakra-ui/react';
 import { usePhrases } from '../../context/PhraseContext';
 import {
   FormContainer,
-  StyledInput,
+  StyledTextArea,
   StyledButton,
 } from './FormAddPhrase.styles';
 import { phraseValidationSchema } from '../../utils/validation';
@@ -34,7 +34,7 @@ const FormAddPhrase = () => {
           <FormControl isInvalid={!!errors.phrase && touched.phrase}>
             <Field name='phrase'>
               {({ field }: { field: any }) => (
-                <StyledInput
+                <StyledTextArea
                   {...field}
                   placeholder='Escribe una frase...'
                   size='md'

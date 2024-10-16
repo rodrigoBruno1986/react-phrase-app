@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import {
   Box,
   Button as ChakraButton,
-  Input as ChakraInput,
+  Textarea as ChakraTextarea,
 } from '@chakra-ui/react';
 import colors from '../../theme/colors';
 
@@ -13,7 +13,7 @@ export const FormContainer = styled(Box)`
   border-radius: 12px;
 `;
 
-export const StyledInput = styled(ChakraInput)`
+export const StyledTextArea = styled(ChakraTextarea)`
   font-size: 1.1rem;
   padding: 10px;
   border-radius: 8px;
@@ -21,6 +21,8 @@ export const StyledInput = styled(ChakraInput)`
   &:focus {
     border-color: ${colors.primary[500]};
   }
+  resize: vertical; /* Permite que el usuario ajuste la altura */
+  min-height: 100px; /* Altura inicial moderada */
 `;
 
 export const StyledButton = styled(ChakraButton)`

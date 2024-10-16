@@ -20,8 +20,8 @@ const App = () => {
 
   return (
     <Container>
-      <StyledHeading as='h1' mb={6}>
-        Phrase Management App
+      <StyledHeading as='h1' mb={61}>
+        App de Gestión de Frases
       </StyledHeading>
       <ContentFormAddPhrase>
         <FormAddPhrase />

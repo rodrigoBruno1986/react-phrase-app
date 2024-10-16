@@ -9,7 +9,7 @@ export const useToastNotification = () => {
       status: 'success',
       duration: 3000,
       isClosable: true,
-      position: 'top-right',
+      position: 'bottom-right',
     });
   };
 
@@ -19,7 +19,7 @@ export const useToastNotification = () => {
       status: 'error',
       duration: 3000,
       isClosable: true,
-      position: 'top-right',
+      position: 'bottom-right',
     });
   };
 

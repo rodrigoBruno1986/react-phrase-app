@@ -10,6 +10,7 @@ import {
   ModalCloseButton,
   Input,
 } from '@chakra-ui/react';
+import colors from '../../theme/colors';
 
 interface EditPhraseModalProps {
   isOpen: boolean;
@@ -50,16 +51,19 @@ const EditPhraseModal: React.FC<EditPhraseModalProps> = ({
         </ModalBody>
 
         <ModalFooter>
+          <Button mr={3} onClick={onClose}>
+            Cancelar
+          </Button>
           <Button
-            colorScheme='blue'
-            mr={3}
+            color={colors.primary[50]}
             onClick={() => onSave(newPhrase)}
             isDisabled={isSaveDisabled}
+            bg={colors.primary[500]}
+            _hover={{
+              bg: colors.primary[300],
+            }}
           >
             Guardar
-          </Button>
-          <Button variant='ghost' onClick={onClose}>
-            Cancelar
           </Button>
         </ModalFooter>
       </ModalContent>
