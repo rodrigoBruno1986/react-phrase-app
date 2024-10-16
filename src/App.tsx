@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { SimpleGrid, Box } from '@chakra-ui/react';
+import React, { useState, useMemo } from 'react';
+import { Box } from '@chakra-ui/react';
 import { Container, StyledHeading, ContentFormAddPhrase } from './App.styles';
 import { PhraseProvider, usePhrases } from './context/PhraseContext';
 import FormAddPhrase from '../src/components/FormAddPhrase/FormAddPhrase';
 import SearchBar from './components/SearchBar';
-import Card from './components/Card/Card';
+import ListPhrases from './components/ListPhrases';
 
 const App = () => {
-  const { phrases, deletePhrase, filterPhrases, editPhrase } = usePhrases();
-  const [filteredPhrases, setFilteredPhrases] = useState<string[]>(phrases);
+  const { deletePhrase, filterPhrases, editPhrase } = usePhrases();
+  const [query, setQuery] = useState<string>('');
 
-  const handleSearch = (query: string) => {
-    const filtered = filterPhrases(query);
-    setFilteredPhrases(filtered);
+  const handleSearch = (searchQuery: string) => {
+    setQuery(searchQuery);
   };
 
-  useEffect(() => {
-    setFilteredPhrases(phrases);
-  }, [phrases]);
+  const filteredPhrases = useMemo(() => {
+    return filterPhrases(query);
+  }, [query, filterPhrases]);
 
   return (
     <Container>
@@ -37,18 +36,13 @@ const App = () => {
         alignItems='center'
         flexDirection='column'
       >
-        <SearchBar onSearch={handleSearch}></SearchBar>
-
-        <SimpleGrid columns={[1, 1, 1]} spacing={5} mt={5} width='100%'>
-          {filteredPhrases.map((phrase, index) => (
-            <Card
-              key={index}
-              phrase={phrase}
-              onDelete={() => deletePhrase(index)}
-              onEdit={(newPhrase) => editPhrase(index, newPhrase)}
-            />
-          ))}
-        </SimpleGrid>
+        <SearchBar onSearch={handleSearch} />
+        <ListPhrases
+          phrases={filteredPhrases}
+          query={query}
+          onDelete={deletePhrase}
+          onEdit={editPhrase}
+        />
       </Box>
     </Container>
   );

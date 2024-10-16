@@ -36,19 +36,23 @@ const PhraseCard: React.FC<CardProps> = ({ phrase, onDelete, onEdit }) => {
             onClick={() => setEditModalOpen(true)}
             size='sm'
             fontSize='14px'
+            justifyContent='flex-end'
             background='trasparent'
             color={colors.primary[500]}
             _hover={{ color: colors.primary[700] }}
+            _active={{ background: 'none', boxShadow: 'none' }}
           />
           <IconButton
             aria-label='Eliminar frase'
             icon={<FaTrash />}
             onClick={() => setDeleteModalOpen(true)}
             size='sm'
+            justifyContent='flex-end'
             fontSize='14px'
             background='trasparent'
             color={colors.secondary[500]}
             _hover={{ color: colors.secondary[700] }}
+            _active={{ background: 'none', boxShadow: 'none' }}
           />
         </StyledIconButtonContainer>
       </Flex>

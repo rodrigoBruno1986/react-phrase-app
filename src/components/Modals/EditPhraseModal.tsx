@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Button,
   Modal,
@@ -9,9 +9,7 @@ import {
   ModalBody,
   ModalCloseButton,
   Input,
-  Text,
 } from '@chakra-ui/react';
-import { phraseValidationSchema } from '../../utils/validation';
 
 interface EditPhraseModalProps {
   isOpen: boolean;
@@ -27,23 +25,21 @@ const EditPhraseModal: React.FC<EditPhraseModalProps> = ({
   onSave,
 }) => {
   const [newPhrase, setNewPhrase] = useState(initialPhrase);
-  const [error, setError] = useState<string | null>(null);
+  const [isSaveDisabled, setIsSaveDisabled] = useState(true);
 
-  const handleSave = async () => {
-    try {
-      await phraseValidationSchema.validate({ phrase: newPhrase });
-      setError(null);
-      onSave(newPhrase);
-    } catch (validationError: any) {
-      setError(validationError.message);
+  useEffect(() => {
+    if (newPhrase.trim() === initialPhrase.trim() || newPhrase.trim() === '') {
+      setIsSaveDisabled(true);
+    } else {
+      setIsSaveDisabled(false);
     }
-  };
+  }, [newPhrase, initialPhrase]);
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Editar Frase</ModalHeader>
+        <ModalHeader>Editar frase</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Input
@@ -51,11 +47,15 @@ const EditPhraseModal: React.FC<EditPhraseModalProps> = ({
             onChange={(e) => setNewPhrase(e.target.value)}
             placeholder='Editar frase...'
           />
-          {error && <Text color='red.500'>{error}</Text>}{' '}
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme='blue' mr={3} onClick={handleSave}>
+          <Button
+            colorScheme='blue'
+            mr={3}
+            onClick={() => onSave(newPhrase)}
+            isDisabled={isSaveDisabled}
+          >
             Guardar
           </Button>
           <Button variant='ghost' onClick={onClose}>

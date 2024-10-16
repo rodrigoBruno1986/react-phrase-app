@@ -5,13 +5,14 @@ import React, {
   useContext,
   ReactNode,
 } from 'react';
+import { useToastNotification } from '../hooks/useToastNotification';
 
 interface PhraseContextType {
   phrases: string[];
   addPhrase: (phrase: string) => void;
-  deletePhrase: (index: number) => void;
-  filterPhrases: (query: string) => string[];
+  deletePhrase: (phrase: string) => void;
   editPhrase: (index: number, newPhrase: string) => void;
+  filterPhrases: (query: string) => string[];
 }
 
 const PhraseContext = createContext<PhraseContextType | undefined>(undefined);
@@ -34,6 +35,7 @@ const savePhrasesToLocalStorage = (phrases: string[]) => {
 
 export const PhraseProvider = ({ children }: { children: ReactNode }) => {
   const [phrases, setPhrases] = useState<string[]>(getPhrasesFromLocalStorage);
+  const { showSuccessToast } = useToastNotification();
 
   useEffect(() => {
     savePhrasesToLocalStorage(phrases);
@@ -41,23 +43,28 @@ export const PhraseProvider = ({ children }: { children: ReactNode }) => {
 
   const addPhrase = (phrase: string) => {
     setPhrases([...phrases, phrase]);
+    showSuccessToast('Frase agregada exitosamente');
   };
 
-  const deletePhrase = (index: number) => {
-    setPhrases(phrases.filter((_, i) => i !== index));
+  const deletePhrase = (phraseToDelete: string) => {
+    const updatedPhrases = phrases.filter(
+      (phrase) => phrase !== phraseToDelete
+    );
+    setPhrases(updatedPhrases);
+    showSuccessToast('Frase eliminada exitosamente');
+  };
+
+  const editPhrase = (index: number, newPhrase: string) => {
+    const updatedPhrases = [...phrases];
+    updatedPhrases[index] = newPhrase;
+    setPhrases(updatedPhrases);
+    showSuccessToast('Frase editada exitosamente');
   };
 
   const filterPhrases = (query: string) => {
     return phrases.filter((phrase) =>
       phrase.toLowerCase().includes(query.toLowerCase())
     );
-  };
-
-  const editPhrase = (index: number, newPhrase: string) => {
-    const updatedPhrases = phrases.map((phrase, i) =>
-      i === index ? newPhrase : phrase
-    );
-    setPhrases(updatedPhrases);
   };
 
   return (
