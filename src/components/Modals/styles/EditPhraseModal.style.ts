@@ -86,3 +86,9 @@ export const InputField = styled.input`
     outline: none;
   }
 `;
+
+export const ErrorText = styled.p`
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 8px;
+`;

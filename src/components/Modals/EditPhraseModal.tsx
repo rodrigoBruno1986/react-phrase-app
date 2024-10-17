@@ -9,6 +9,7 @@ import {
   InputField,
   Button,
   SaveButton,
+  ErrorText,
 } from './styles/EditPhraseModal.style';
 
 interface EditPhraseModalProps {
@@ -18,6 +19,8 @@ interface EditPhraseModalProps {
   onSave: (newPhrase: string) => void;
 }
 
+const MIN_CHARACTERS = 5;
+
 const EditPhraseModal: React.FC<EditPhraseModalProps> = ({
   isOpen,
   onClose,
@@ -26,20 +29,24 @@ const EditPhraseModal: React.FC<EditPhraseModalProps> = ({
 }) => {
   const [newPhrase, setNewPhrase] = useState(initialPhrase);
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (isOpen) {
       setNewPhrase(initialPhrase);
+      setError(null);
     }
   }, [isOpen, initialPhrase]);
 
   useEffect(() => {
-    if (newPhrase.trim() === initialPhrase.trim() || newPhrase.trim() === '') {
-      setIsSaveDisabled(true);
-    } else {
+    if (newPhrase.length >= MIN_CHARACTERS) {
       setIsSaveDisabled(false);
+      setError(null);
+    } else {
+      setIsSaveDisabled(true);
+      setError(`La frase debe tener al menos ${MIN_CHARACTERS} caracteres.`);
     }
-  }, [newPhrase, initialPhrase]);
+  }, [newPhrase]);
 
   if (!isOpen) return null;
 
@@ -47,7 +54,7 @@ const EditPhraseModal: React.FC<EditPhraseModalProps> = ({
     <Overlay>
       <ModalContainer>
         <Header>
-          <h2>Editar sdsdsdsfrase</h2>
+          <h2>Editar</h2>
           <CloseButton onClick={onClose}>X</CloseButton>
         </Header>
         <Body>
@@ -56,6 +63,7 @@ const EditPhraseModal: React.FC<EditPhraseModalProps> = ({
             onChange={(e) => setNewPhrase(e.target.value)}
             placeholder='Editar frase...'
           />
+          {error && <ErrorText>{error}</ErrorText>}
         </Body>
         <Footer>
           <Button onClick={onClose}>Cancelar</Button>

@@ -24,7 +24,7 @@ describe('EditPhraseModal Component', () => {
   it('debe renderizar correctamente cuando el modal está abierto', () => {
     setup();
     expect(screen.getByPlaceholderText('Editar frase...')).toBeInTheDocument();
-    expect(screen.getByText('Editar sdsdsdsfrase')).toBeInTheDocument();
+    expect(screen.getByText('Editar')).toBeInTheDocument();
     expect(screen.getByDisplayValue('Frase inicial')).toBeInTheDocument();
   });
 
@@ -34,22 +34,30 @@ describe('EditPhraseModal Component', () => {
     expect(mockOnClose).toHaveBeenCalled();
   });
 
-  it('debe deshabilitar el botón "Guardar" si la frase no ha cambiado', () => {
+  it('debe deshabilitar el botón "Guardar" si la frase tiene menos de 5 caracteres', () => {
     setup();
+    const inputField = screen.getByPlaceholderText('Editar frase...');
     const saveButton = screen.getByText('Guardar');
+
+    fireEvent.change(inputField, { target: { value: 'Hola' } });
+
     expect(saveButton).toBeDisabled();
+    expect(
+      screen.getByText('La frase debe tener al menos 5 caracteres.')
+    ).toBeInTheDocument();
   });
 
-  it('debe habilitar el botón "Guardar" si la frase ha cambiado', async () => {
+  it('debe habilitar el botón "Guardar" si la frase tiene al menos 5 caracteres', () => {
     setup();
     const inputField = screen.getByPlaceholderText('Editar frase...');
     const saveButton = screen.getByText('Guardar');
 
     fireEvent.change(inputField, { target: { value: 'Nueva frase' } });
 
-    await waitFor(() => {
-      expect(saveButton).not.toBeDisabled();
-    });
+    expect(saveButton).not.toBeDisabled();
+    expect(
+      screen.queryByText('La frase debe tener al menos 5 caracteres.')
+    ).toBeNull();
   });
 
   it('debe llamar a la función onSave con la nueva frase', async () => {
@@ -68,6 +76,6 @@ describe('EditPhraseModal Component', () => {
 
   it('no debe renderizar nada si el modal está cerrado', () => {
     setup(false);
-    expect(screen.queryByText('Editar sdsdsdsfrase')).toBeNull();
+    expect(screen.queryByPlaceholderText('Editar frase...')).toBeNull();
   });
 });

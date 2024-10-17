@@ -25,14 +25,14 @@ export const StyledTextArea = styled.textarea`
 export const StyledButton = styled.button`
   font-size: 1.1rem;
   padding: 10px;
-  background-color: ${colors.primary[500]};
+  background-color: ${colors.primary[400]};
   color: white;
   border: none;
   border-radius: 8px;
   cursor: pointer;
 
   &:hover {
-    background-color: ${colors.primary[600]};
+    background-color: ${colors.primary[300]};
   }
 
   &:disabled {

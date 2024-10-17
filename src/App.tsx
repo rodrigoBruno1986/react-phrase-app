@@ -1,10 +1,16 @@
 import React, { useState, useMemo } from 'react';
 import { Box } from '@chakra-ui/react';
-import { Container, StyledHeading, ContentFormAddPhrase } from './App.styles';
+import {
+  Container,
+  StyledHeading,
+  ContentFormAddPhrase,
+  ContentNavBar,
+} from './App.styles';
 import { PhraseProvider, usePhrases } from './context/PhraseContext';
 import FormAddPhrase from '../src/components/FormAddPhrase/FormAddPhrase';
 import SearchBar from '../src/components/SearchBar/SearchBar';
 import ListPhrases from '../src/components/ListPhrases/ListPhrases';
+import AppNavBar from './components/AppNavBar/AppNavBar';
 
 const App = () => {
   const { deletePhrase, filterPhrases, editPhrase } = usePhrases();
@@ -18,33 +24,47 @@ const App = () => {
     return filterPhrases(query);
   }, [query, filterPhrases]);
 
-  return (
-    <Container>
-      <StyledHeading as='h1' mb={6}>
-        App de Gestión de Frases
-      </StyledHeading>
-      <ContentFormAddPhrase>
-        <FormAddPhrase />
-      </ContentFormAddPhrase>
+  const handleResetApp = () => {
+    localStorage.clear();
+    window.location.reload();
+  };
 
-      <Box
-        mt={20}
-        maxW='700px'
-        mx='auto'
-        display='flex'
-        justifyContent='center'
-        alignItems='center'
-        flexDirection='column'
-      >
-        <SearchBar onSearch={handleSearch} />
-        <ListPhrases
-          phrases={filteredPhrases}
-          query={query}
-          onDelete={deletePhrase}
-          onEdit={editPhrase}
+  return (
+    <>
+      <ContentNavBar>
+        <AppNavBar
+          onReset={handleResetApp}
+          hasPhrases={filteredPhrases.length > 0}
         />
-      </Box>
-    </Container>
+      </ContentNavBar>
+
+      <Container>
+        <StyledHeading as='h1' mb={6}>
+          App de Gestión de Frases
+        </StyledHeading>
+        <ContentFormAddPhrase>
+          <FormAddPhrase />
+        </ContentFormAddPhrase>
+
+        <Box
+          mt={50}
+          maxW='700px'
+          mx='auto'
+          display='flex'
+          justifyContent='center'
+          alignItems='center'
+          flexDirection='column'
+        >
+          <SearchBar onSearch={handleSearch} />
+          <ListPhrases
+            phrases={filteredPhrases}
+            query={query}
+            onDelete={deletePhrase}
+            onEdit={editPhrase}
+          />
+        </Box>
+      </Container>
+    </>
   );
 };
 

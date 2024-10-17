@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { Box, Heading } from '@chakra-ui/react';
 import colors from '../src/theme/colors';
 
+export const ContentNavBar = styled.div``;
+
 export const Container = styled(Box)`
   max-width: 1200px;
   margin: 0 auto;
@@ -23,7 +25,7 @@ export const StyledHeading = styled(Heading)`
 export const ContentFormAddPhrase = styled(Box)`
   max-width: 700px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 10px;
   border-radius: 12px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 `;
