@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
-import { NavBar, LogoImage, ResetButton } from './styles/AppNavBar.styles';
+import {
+  NavBar,
+  LogoImage,
+  ResetButton,
+  ShowPostsButton,
+  ContentButtons,
+} from './styles/AppNavBar.styles';
 
 interface NavBarProps {
   onReset: () => void;
   hasPhrases: boolean;
+  onOpenPostsModal: () => void;
 }
 
-const AppNavBar: React.FC<NavBarProps> = ({ onReset, hasPhrases }) => {
+const AppNavBar: React.FC<NavBarProps> = ({
+  onReset,
+  hasPhrases,
+  onOpenPostsModal,
+}) => {
   const [appReset, setAppReset] = useState(false);
 
   const handleReset = () => {
@@ -21,9 +32,12 @@ const AppNavBar: React.FC<NavBarProps> = ({ onReset, hasPhrases }) => {
   return (
     <NavBar>
       <LogoImage src='/LogoPie.png' alt='App Logo' />
-      <ResetButton onClick={handleReset} disabled={appReset || !hasPhrases}>
-        {appReset ? 'Reiniciando...' : 'Reiniciar App'}
-      </ResetButton>
+      <ContentButtons>
+        <ShowPostsButton onClick={onOpenPostsModal}>Datos Api</ShowPostsButton>
+        <ResetButton onClick={handleReset} disabled={appReset || !hasPhrases}>
+          {appReset ? 'Reiniciando...' : 'Reiniciar App'}
+        </ResetButton>
+      </ContentButtons>
     </NavBar>
   );
 };

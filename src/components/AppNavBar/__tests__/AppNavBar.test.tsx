@@ -5,7 +5,15 @@ describe('AppNavBar Component', () => {
   const mockOnReset = jest.fn();
 
   const setup = (hasPhrases = true) => {
-    render(<AppNavBar onReset={mockOnReset} hasPhrases={hasPhrases} />);
+    render(
+      <AppNavBar
+        onReset={mockOnReset}
+        hasPhrases={hasPhrases}
+        onOpenPostsModal={function (): void {
+          throw new Error('Function not implemented.');
+        }}
+      />
+    );
   };
 
   it('debe cambiar a "Reiniciando..." cuando se hace clic en el botón y debe deshabilitarse', async () => {

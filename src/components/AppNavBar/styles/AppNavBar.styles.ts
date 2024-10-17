@@ -37,3 +37,20 @@ export const ResetButton = styled.button`
     }
   }
 `;
+
+export const ShowPostsButton = styled(ResetButton)`
+  background-color: ${colors.secondary[500]};
+  margin-right: 15px;
+
+  &:hover {
+    background-color: ${colors.secondary[300]};
+  }
+
+  &:disabled {
+    background-color: ${colors.secondary[300]};
+  }
+`;
+export const ContentButtons = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;

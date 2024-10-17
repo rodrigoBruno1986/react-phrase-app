@@ -11,10 +11,12 @@ import FormAddPhrase from '../src/components/FormAddPhrase/FormAddPhrase';
 import SearchBar from '../src/components/SearchBar/SearchBar';
 import ListPhrases from '../src/components/ListPhrases/ListPhrases';
 import AppNavBar from './components/AppNavBar/AppNavBar';
+import PostsModal from './components/Modals/PostsModal/PostsModal';
 
 const App = () => {
   const { deletePhrase, filterPhrases, editPhrase } = usePhrases();
   const [query, setQuery] = useState<string>('');
+  const [isPostsModalOpen, setIsPostsModalOpen] = useState(false);
 
   const handleSearch = (searchQuery: string) => {
     setQuery(searchQuery);
@@ -29,12 +31,21 @@ const App = () => {
     window.location.reload();
   };
 
+  const handleOpenPostsModal = () => {
+    setIsPostsModalOpen(true);
+  };
+
+  const handleClosePostsModal = () => {
+    setIsPostsModalOpen(false);
+  };
+
   return (
     <>
       <ContentNavBar>
         <AppNavBar
           onReset={handleResetApp}
           hasPhrases={filteredPhrases.length > 0}
+          onOpenPostsModal={handleOpenPostsModal}
         />
       </ContentNavBar>
 
@@ -64,6 +75,8 @@ const App = () => {
           />
         </Box>
       </Container>
+
+      <PostsModal isOpen={isPostsModalOpen} onClose={handleClosePostsModal} />
     </>
   );
 };
