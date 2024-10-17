@@ -1,5 +1,9 @@
 import React from 'react';
-import { Button, HStack, Text } from '@chakra-ui/react';
+import {
+  PaginationContainer,
+  PaginationButton,
+  PaginationText,
+} from './styles/Pagination.style';
 
 interface PaginationProps {
   currentPage: number;
@@ -25,15 +29,18 @@ const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <HStack spacing={4} mt={4} justifyContent='center'>
-      <Button onClick={handlePrevPage} isDisabled={currentPage === 1}>
+    <PaginationContainer>
+      <PaginationButton onClick={handlePrevPage} disabled={currentPage === 1}>
         Anterior
-      </Button>
-      <Text>{`Página ${currentPage} de ${totalPages}`}</Text>
-      <Button onClick={handleNextPage} isDisabled={currentPage === totalPages}>
+      </PaginationButton>
+      <PaginationText>{`Página ${currentPage} de ${totalPages}`}</PaginationText>
+      <PaginationButton
+        onClick={handleNextPage}
+        disabled={currentPage === totalPages}
+      >
         Siguiente
-      </Button>
-    </HStack>
+      </PaginationButton>
+    </PaginationContainer>
   );
 };
 

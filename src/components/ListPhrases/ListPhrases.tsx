@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
-import { SimpleGrid, Text } from '@chakra-ui/react';
-import Card from './Card/Card';
-import Pagination from '../components/Pagination/Pagination';
+import {
+  ListContainer,
+  MessageText,
+  PhrasesGrid,
+} from './styles/ListPhrases.styles';
+import Card from '../Card/Card';
+import Pagination from '../Pagination/Pagination';
 
 interface ListPhrasesProps {
   phrases: string[];
@@ -28,18 +32,18 @@ const ListPhrases: React.FC<ListPhrasesProps> = ({
   );
 
   return (
-    <>
-      <SimpleGrid columns={[1, 1, 1]} spacing={5} mt={5} width='100%'>
+    <ListContainer>
+      <PhrasesGrid>
         {paginatedPhrases.length === 0 && query === '' && (
-          <Text mt={9} color='gray.500' justifyContent='center' display='flex'>
+          <MessageText>
             No hay frases disponibles. ¡Agrega una nueva frase!
-          </Text>
+          </MessageText>
         )}
 
         {paginatedPhrases.length === 0 && query !== '' && (
-          <Text mt={9} color='gray.500' justifyContent='center' display='flex'>
+          <MessageText>
             No se encontraron resultados para "{query}".
-          </Text>
+          </MessageText>
         )}
 
         {paginatedPhrases.map((phrase, index) => {
@@ -54,7 +58,7 @@ const ListPhrases: React.FC<ListPhrasesProps> = ({
             />
           );
         })}
-      </SimpleGrid>
+      </PhrasesGrid>
 
       {totalPages > 1 && (
         <Pagination
@@ -63,7 +67,7 @@ const ListPhrases: React.FC<ListPhrasesProps> = ({
           onPageChange={(page) => setCurrentPage(page)}
         />
       )}
-    </>
+    </ListContainer>
   );
 };
 

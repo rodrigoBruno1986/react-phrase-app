@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import {
+  ModalContainer,
+  Overlay,
+  Header,
+  Footer,
+  Body,
+  CloseButton,
+  InputField,
   Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Input,
-} from '@chakra-ui/react';
-import colors from '../../theme/colors';
+  SaveButton,
+} from './styles/EditPhraseModal.style';
 
 interface EditPhraseModalProps {
   isOpen: boolean;
@@ -29,6 +28,12 @@ const EditPhraseModal: React.FC<EditPhraseModalProps> = ({
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
 
   useEffect(() => {
+    if (isOpen) {
+      setNewPhrase(initialPhrase);
+    }
+  }, [isOpen, initialPhrase]);
+
+  useEffect(() => {
     if (newPhrase.trim() === initialPhrase.trim() || newPhrase.trim() === '') {
       setIsSaveDisabled(true);
     } else {
@@ -36,38 +41,33 @@ const EditPhraseModal: React.FC<EditPhraseModalProps> = ({
     }
   }, [newPhrase, initialPhrase]);
 
+  if (!isOpen) return null;
+
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Editar frase</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>
-          <Input
+    <Overlay>
+      <ModalContainer>
+        <Header>
+          <h2>Editar sdsdsdsfrase</h2>
+          <CloseButton onClick={onClose}>X</CloseButton>
+        </Header>
+        <Body>
+          <InputField
             value={newPhrase}
             onChange={(e) => setNewPhrase(e.target.value)}
             placeholder='Editar frase...'
           />
-        </ModalBody>
-
-        <ModalFooter>
-          <Button mr={3} onClick={onClose}>
-            Cancelar
-          </Button>
-          <Button
-            color={colors.primary[50]}
+        </Body>
+        <Footer>
+          <Button onClick={onClose}>Cancelar</Button>
+          <SaveButton
             onClick={() => onSave(newPhrase)}
-            isDisabled={isSaveDisabled}
-            bg={colors.primary[500]}
-            _hover={{
-              bg: colors.primary[300],
-            }}
+            disabled={isSaveDisabled}
           >
             Guardar
-          </Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+          </SaveButton>
+        </Footer>
+      </ModalContainer>
+    </Overlay>
   );
 };
 

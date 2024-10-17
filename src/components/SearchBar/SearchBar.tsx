@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Input } from '@chakra-ui/react';
-import { useDebounce } from '../hooks/useDebounce';
+import { useDebounce } from '../../hooks/useDebounce';
+import { StyledInput } from './styles/SearchBar.styles';
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
@@ -15,7 +15,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
   }, [debouncedQuery, onSearch]);
 
   return (
-    <Input
+    <StyledInput
       placeholder='Buscar frases...'
       value={query}
       onChange={(e) => setQuery(e.target.value)}

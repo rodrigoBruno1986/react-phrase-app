@@ -1,14 +1,14 @@
 import React from 'react';
 import {
+  Overlay,
+  ModalContainer,
+  Header,
+  CloseButton,
+  Body,
+  Footer,
   Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-} from '@chakra-ui/react';
+  DeleteButton,
+} from './styles/DeleteConfirmationModal.style';
 
 interface DeleteConfirmationModalProps {
   isOpen: boolean;
@@ -21,24 +21,22 @@ const DeleteConfirmationModal: React.FC<DeleteConfirmationModalProps> = ({
   onClose,
   onDelete,
 }) => {
-  return (
-    <Modal isOpen={isOpen} onClose={onClose}>
-      <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>Confirmar el borrado</ModalHeader>
-        <ModalCloseButton />
-        <ModalBody>Estas seguro de eliminar la frase?</ModalBody>
+  if (!isOpen) return null;
 
-        <ModalFooter>
-          <Button mr={3} onClick={onClose}>
-            Cancelar
-          </Button>
-          <Button colorScheme='red' onClick={onDelete}>
-            Borrar
-          </Button>
-        </ModalFooter>
-      </ModalContent>
-    </Modal>
+  return (
+    <Overlay>
+      <ModalContainer>
+        <Header>
+          <h2>Confirmar el borrado</h2>
+          <CloseButton onClick={onClose}>X</CloseButton>
+        </Header>
+        <Body>¿Estás seguro de eliminar la frase?</Body>
+        <Footer>
+          <Button onClick={onClose}>Cancelar</Button>
+          <DeleteButton onClick={onDelete}>Borrar</DeleteButton>
+        </Footer>
+      </ModalContainer>
+    </Overlay>
   );
 };
 

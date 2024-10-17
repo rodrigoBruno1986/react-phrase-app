@@ -6,7 +6,7 @@ export const Container = styled(Box)`
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  padding-top: 4rem;
+  padding-top: 3rem;
   border-radius: 8px;
   min-height: 100vh;
 `;

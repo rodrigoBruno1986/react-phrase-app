@@ -3,8 +3,8 @@ import { Box } from '@chakra-ui/react';
 import { Container, StyledHeading, ContentFormAddPhrase } from './App.styles';
 import { PhraseProvider, usePhrases } from './context/PhraseContext';
 import FormAddPhrase from '../src/components/FormAddPhrase/FormAddPhrase';
-import SearchBar from './components/SearchBar';
-import ListPhrases from './components/ListPhrases';
+import SearchBar from '../src/components/SearchBar/SearchBar';
+import ListPhrases from '../src/components/ListPhrases/ListPhrases';
 
 const App = () => {
   const { deletePhrase, filterPhrases, editPhrase } = usePhrases();

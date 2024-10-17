@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { Text, IconButton, Flex } from '@chakra-ui/react';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import {
   StyledCard,
   StyledCardHeader,
   StyledIconButtonContainer,
-} from './Card.styles';
+  StyledButton,
+  StyledFlex,
+  StyledText,
+} from './styles/Card.styles';
 import EditPhraseModal from '../Modals/EditPhraseModal';
 import DeleteConfirmationModal from '../Modals/DeleteConfirmationModal';
-import colors from '../../theme/colors';
 
 interface CardProps {
   phrase: string;
@@ -22,40 +23,30 @@ const PhraseCard: React.FC<CardProps> = ({ phrase, onDelete, onEdit }) => {
 
   return (
     <>
-      <Flex alignItems='center'>
+      <StyledFlex>
         <StyledCard>
           <StyledCardHeader>
-            <Text size='md'>{phrase}</Text>
+            <StyledText>{phrase}</StyledText>
           </StyledCardHeader>
         </StyledCard>
 
         <StyledIconButtonContainer>
-          <IconButton
+          <StyledButton
             aria-label='Editar frase'
-            icon={<FaEdit />}
             onClick={() => setEditModalOpen(true)}
-            size='sm'
-            fontSize='14px'
-            justifyContent='flex-end'
-            background='trasparent'
-            color='grey'
-            _hover={{ color: colors.primary[700] }}
-            _active={{ background: 'none', boxShadow: 'none' }}
-          />
-          <IconButton
+            style={{ fontSize: '14px', color: 'grey' }}
+          >
+            <FaEdit />
+          </StyledButton>
+          <StyledButton
             aria-label='Eliminar frase'
-            icon={<FaTrash />}
             onClick={() => setDeleteModalOpen(true)}
-            size='sm'
-            justifyContent='flex-end'
-            fontSize='14px'
-            background='trasparent'
-            color='grey'
-            _hover={{ color: colors.secondary[700] }}
-            _active={{ background: 'none', boxShadow: 'none' }}
-          />
+            style={{ fontSize: '14px', color: 'grey' }}
+          >
+            <FaTrash />
+          </StyledButton>
         </StyledIconButtonContainer>
-      </Flex>
+      </StyledFlex>
 
       <EditPhraseModal
         isOpen={isEditModalOpen}
