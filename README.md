@@ -17,7 +17,7 @@ Sigue estos pasos para instalar y ejecutar el proyecto en tu máquina local:
 
 1. **Clonar el repositorio**:
    ```bash
-   git clone https://github.com/tu-usuario/react-phrase-app.git
+   git@github.com:rodrigoBruno1986/react-phrase-app.git
    cd react-phrase-app
 
 1. **Instalar dependencias**:
