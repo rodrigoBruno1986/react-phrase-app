@@ -15,16 +15,20 @@
 
 Sigue estos pasos para instalar y ejecutar el proyecto en tu máquina local:
 
-1. **Clonar el repositorio**:
+1. **Clonar el repositorio***:
    ```bash
-   git@github.com:rodrigoBruno1986/react-phrase-app.git
-   cd react-phrase-app
+     git@github.com:rodrigoBruno1986/react-phrase-app.git
+     cd react-phrase-app
 
-1. **Instalar dependencias**:
+2. **Instalar dependencias**:
    ```bash
-   npm install
+      npm install
+
+3. **Correr APP**:
+   ```bash
+   npm run start
    
-2. **Ejecutar las pruebas**:
+4. **Ejecutar las pruebas**:
   ```bash
    npm run test 
 
