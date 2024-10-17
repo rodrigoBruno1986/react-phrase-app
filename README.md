@@ -1,46 +1,30 @@
-# Getting Started with Create React App
+# React Phrase App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Descripción del Proyecto
 
-## Available Scripts
+**React Phrase App** es una aplicación web basada en React que permite visualizar frases y hacer llamados a una API para mostrar publicaciones obtenidas de un servidor remoto. El proyecto utiliza librerías modernas como **Chakra UI** para el diseño de la interfaz, **Formik** para la gestión de formularios, y **Styled Components** para un estilado basado en componentes.
 
-In the project directory, you can run:
+### Funcionalidades Principales
 
-### `npm start`
+- **Mostrar Publicaciones desde una API:** Se implementó una funcionalidad que permite realizar un llamado a una API para obtener publicaciones y mostrarlas en un modal. 
+- **Gestión del Estado con `useState` y `useEffect`:** Utilizamos los hooks de React para manejar el estado y las actualizaciones asincrónicas en la aplicación.
+- **Testeo con `React Testing Library`:** Implementamos pruebas para asegurar el correcto funcionamiento de los componentes y su interacción con la API. Los tests verifican, entre otras cosas, la correcta visualización de las publicaciones y el manejo de errores.
+- **Botón de Reiniciar:** Implementamos un botón que permite reiniciar el estado de la aplicación y borrar las frases mostradas, con un indicador visual de "Reiniciando...".
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Instalación
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Sigue estos pasos para instalar y ejecutar el proyecto en tu máquina local:
 
-### `npm test`
+1. **Clonar el repositorio**:
+   ```bash
+   git clone https://github.com/tu-usuario/react-phrase-app.git
+   cd react-phrase-app
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Instalar dependencias**:
+   ```bash
+   npm install
+   
+2. **Ejecutar las pruebas**:
+  ```bash
+   npm run test 
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
