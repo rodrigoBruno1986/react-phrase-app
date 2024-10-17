@@ -1,5 +1,6 @@
 {
   "name": "react-phrase-app",
+  "author": "Rodrigo Sebastian Benitez",  
   "version": "0.1.0",
   "private": true,
   "dependencies": {
