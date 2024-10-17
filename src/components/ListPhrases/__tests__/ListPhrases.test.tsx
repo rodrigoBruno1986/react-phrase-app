@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import ListPhrases from '../ListPhrases';
 
 jest.mock('../../Card/Card', () => ({ phrase, onDelete, onEdit }: any) => (
@@ -33,13 +33,21 @@ jest.mock(
       )
 );
 
+jest.mock('../styles/ListPhrases.styles', () => ({
+  Loader: () => <div data-testid='loader'>Cargando...</div>,
+  LoaderContainer: ({ children }: any) => <div>{children}</div>,
+  ListContainer: ({ children }: any) => <div>{children}</div>,
+  PhrasesGrid: ({ children }: any) => <div>{children}</div>,
+  MessageText: ({ children }: any) => <p>{children}</p>,
+}));
+
 describe('ListPhrases Component', () => {
   const mockOnDelete = jest.fn();
   const mockOnEdit = jest.fn();
 
   const phrases = ['Frase 1', 'Frase 2', 'Frase 3'];
 
-  const setup = (query = '', currentPage = 1) => {
+  const setup = (query = '') => {
     render(
       <ListPhrases
         phrases={phrases}
@@ -57,7 +65,7 @@ describe('ListPhrases Component', () => {
     expect(screen.getByText('Frase 3')).toBeInTheDocument();
   });
 
-  it('debe mostrar mensaje cuando no hay frases disponibles', () => {
+  it('debe mostrar el mensaje de "No hay frases disponibles"', () => {
     render(
       <ListPhrases
         phrases={[]}
@@ -71,7 +79,7 @@ describe('ListPhrases Component', () => {
     ).toBeInTheDocument();
   });
 
-  it('debe mostrar mensaje cuando no hay resultados de búsqueda', () => {
+  it('debe mostrar el mensaje de "No se encontraron resultados" cuando no hay coincidencias con la búsqueda', async () => {
     render(
       <ListPhrases
         phrases={[]}
@@ -80,8 +88,26 @@ describe('ListPhrases Component', () => {
         onEdit={mockOnEdit}
       />
     );
+
+    await waitFor(() =>
+      expect(screen.queryByTestId('loader')).not.toBeInTheDocument()
+    );
+
     expect(
       screen.getByText('No se encontraron resultados para "no-encontrada".')
     ).toBeInTheDocument();
+  });
+
+  it('debe mostrar el preloader cuando está cargando', () => {
+    render(
+      <ListPhrases
+        phrases={[]}
+        query='algo'
+        onDelete={mockOnDelete}
+        onEdit={mockOnEdit}
+      />
+    );
+
+    expect(screen.getByTestId('loader')).toBeInTheDocument();
   });
 });
